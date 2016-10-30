@@ -278,4 +278,22 @@ class CDiscountWsdl
         }
         return $this->lastResult;
     }
+    
+    /**
+    * Liste des Commandes
+    * @return stdClass
+    */
+    public function getOrderList () {
+        $this->lastResult = null;
+        $params = array(
+            'headerMessage' => $this->getHeaderMessage(),
+        );
+
+        try {
+            $this->lastResult = $this->getSoap()->GetOrderList($params);
+        } catch (SoapFault $exception) {
+            echo '<div class="alert alert-danger">' . $exception->getMessage() . '</div>';
+        }
+        return $this->lastResult;
+    }
 }
